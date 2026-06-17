@@ -68,7 +68,19 @@
     window.addEventListener("resize", resize, { once: true });
   }
 
+  const ADMIN_BYPASS_KEY = "samAdminBypass";
+
+  function isAdminBypass() {
+    if (sessionStorage.getItem(ADMIN_BYPASS_KEY) === "1") return true;
+    if (new URLSearchParams(window.location.search).has("admin")) {
+      sessionStorage.setItem(ADMIN_BYPASS_KEY, "1");
+      return true;
+    }
+    return false;
+  }
+
   function canAccessSite() {
+    if (isAdminBypass()) return true;
     const now = new Date();
     return !(now.getMonth() < 5 || (now.getMonth() === 5 && now.getDate() < 27));
   }
