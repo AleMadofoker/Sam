@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#eef5f3" />
+  <meta name="description" content="Para Sam — 27 de junio" />
+  <title>Feliz Pumpe wey</title>
+  <link rel="icon" href="images/gato.jpg" type="image/jpeg" />
+  <link rel="apple-touch-icon" href="images/gato.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;1,8..60,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="welcome-open">
+  <div class="scroll-progress" aria-hidden="true"><div class="scroll-progress__bar"></div></div>
+  <canvas class="med-particles" id="medParticles" aria-hidden="true"></canvas>
+
+  <audio id="bgMusic" loop preload="auto">
+    <source src="audio/song.mp3" type="audio/mpeg" />
+  </audio>
+
+  <div class="welcome" id="welcome" role="dialog" aria-modal="true" aria-label="Bienvenida">
+    <div class="welcome__bg" aria-hidden="true"></div>
+    <div class="welcome__card">
+      <div class="welcome__avatar">
+        <img src="images/gato.jpg" alt="" width="80" height="80" />
+      </div>
+      <p class="welcome__date">27 de junio</p>
+      <h2 class="welcome__title">¡Feliz cumpleaños,<br /><em>Sam!</em></h2>
+      <p class="welcome__sub">Tengo algo para ti…</p>
+      <button class="welcome__btn" id="welcomeBtn" type="button">
+        <span>Haz click aquí</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <button class="audio-toggle" id="audioToggle" type="button" aria-label="Pausar música" title="Música" hidden>
+    <svg class="audio-toggle__on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18V6l10 6-10 6z"/><circle cx="5" cy="12" r="2" fill="currentColor"/></svg>
+    <svg class="audio-toggle__off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" hidden><path d="M9 18V6l10 6-10 6z"/><line x1="4" y1="4" x2="20" y2="20"/></svg>
+  </button>
+
+  <!-- ── Hero ─────────────────────────────────────────── -->
+  <header class="hero" id="inicio">
+    <div class="hero__bg" aria-hidden="true">
+      <div class="hero__blob hero__blob--med"></div>
+      <div class="hero__blob hero__blob--cat"></div>
+    </div>
+
+    <div class="hero__pulse" aria-hidden="true">
+      <span class="hero__pulse-ring"></span>
+      <span class="hero__pulse-ring hero__pulse-ring--delay"></span>
+      <span class="hero__pulse-dot"></span>
+    </div>
+
+    <svg class="hero__ecg" viewBox="0 0 400 60" preserveAspectRatio="none" aria-hidden="true">
+      <path class="hero__ecg-line" d="M0,30 L60,30 L75,30 L85,10 L95,50 L105,30 L130,30 L145,30 L155,18 L165,42 L175,30 L400,30" />
+      <path class="hero__ecg-glow" d="M0,30 L60,30 L75,30 L85,10 L95,50 L105,30 L130,30 L145,30 L155,18 L165,42 L175,30 L400,30" />
+    </svg>
+
+    <div class="hero__paws" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><ellipse cx="12" cy="16" rx="5" ry="4"/><circle cx="7" cy="10" r="2.5"/><circle cx="12" cy="8" r="2.5"/><circle cx="17" cy="10" r="2.5"/><circle cx="19" cy="14" r="2"/></svg>
+      <svg viewBox="0 0 24 24"><ellipse cx="12" cy="16" rx="5" ry="4"/><circle cx="7" cy="10" r="2.5"/><circle cx="12" cy="8" r="2.5"/><circle cx="17" cy="10" r="2.5"/><circle cx="19" cy="14" r="2"/></svg>
+    </div>
+
+    <div class="hero__content reveal">
+      <h1 class="hero__name">Sam</h1>
+      <p class="hero__line">
+        Mi hermana. Doctora.<br />
+        Y dueña del pinche pankeis :)
+      </p>
+      <div class="hero__chips">
+      </div>
+    </div>
+
+    <a class="hero__scroll" href="#hermana" aria-label="Continuar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    </a>
+  </header>
+
+  <main>
+
+    <!-- ── Hermana ──────────────────────────────────────── -->
+    <section class="block block--intro" id="hermana">
+      <div class="block__inner reveal">
+        <div class="intro-card intro-card--interactive">
+          <div class="intro-card__accent" aria-hidden="true"></div>
+          <p class="intro-card__label">Para mi hermana</p>
+          <p class="intro-card__text">
+            Feliz pumpe wey, sabes que aunque no te lo diga que quiero un buen
+            y me llenas un chingo de orgullo de ti. Estoy seguro de que mamá y papá tambien
+            estan muy orgullosos de ti.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Medicina ───────────────────────────────────── -->
+    <section class="block block--med" id="doctora">
+      <div class="med-monitor" aria-hidden="true">
+        <div class="med-monitor__screen">
+          <svg class="med-monitor__ecg" viewBox="0 0 200 40" preserveAspectRatio="none">
+            <path d="M0,20 L30,20 L38,20 L42,6 L46,34 L50,20 L80,20 L88,20 L92,12 L96,28 L100,20 L200,20"/>
+          </svg>
+          <span class="med-monitor__label">♥ bpm</span>
+        </div>
+      </div>
+
+      <div class="block__deco block__deco--steth block__deco--float" aria-hidden="true">
+        <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="1.2">
+          <path d="M60 20v30c0 12-8 20-20 20s-20-8-20-20V30"/>
+          <path d="M60 20v30c0 12 8 20 20 20s20-8 20-20V50"/>
+          <circle cx="20" cy="70" r="8"/>
+          <circle cx="100" cy="70" r="8"/>
+          <path d="M28 70h44c0 16 8 28 28 28"/>
+          <circle cx="100" cy="98" r="6"/>
+        </svg>
+      </div>
+
+      <div class="block__inner">
+        <header class="block__header reveal">
+          <span class="block__icon block__icon--med" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 4v16M4 12h16"/></svg>
+          </span>
+          <h2 class="block__title">La doctora<br /><em>de la familia</em></h2>
+        </header>
+
+        <figure class="portrait portrait--interactive reveal">
+          <div class="portrait__ring portrait__ring--med portrait__ring--pulse">
+            <div class="portrait__frame">
+              <img
+                src="images/sam.jpg"
+                alt="Sam como doctora"
+                onerror="this.closest('.portrait').classList.add('portrait--empty')"
+              />
+              <div class="portrait__ph">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M4.8 12.5h3.2l1.8-5.5 3.4 11 2-6.5H20"/><circle cx="12" cy="12" r="9"/></svg>
+                <span>images/sam.jpg</span>
+              </div>
+            </div>
+          </div>
+        </figure>
+
+        <div class="prose reveal">
+          <p>
+
+          </p>
+          <p>
+            <!-- Edita -->
+            Y aun así, cada vez que hablo contigo de tu trabajo, lo haces con una
+            calma que no sé de dónde sacas. Me enorgullece decir
+            <strong>mi hermana es doctora</strong> — no por el título,
+            sino por la persona que hay detrás.
+          </p>
+        </div>
+
+        <blockquote class="pullquote pullquote--med pullquote--pulse reveal">
+          <p>Gracias por cuidarme wey, siempre te lo voy a agradecer :)</p>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ── Puente ─────────────────────────────────────── -->
+    <div class="bridge" aria-hidden="true">
+      <div class="bridge__line bridge__line--ecg">
+        <svg viewBox="0 0 300 40" preserveAspectRatio="none">
+          <path class="bridge__ecg-path" d="M0,20 L50,20 L60,20 L68,8 L76,32 L84,20 L120,20 L130,20 L138,12 L146,28 L154,20 L300,20"/>
+        </svg>
+      </div>
+      <div class="bridge__paws">
+        <svg viewBox="0 0 24 24"><ellipse cx="12" cy="16" rx="5" ry="4"/><circle cx="7" cy="10" r="2.5"/><circle cx="12" cy="8" r="2.5"/><circle cx="17" cy="10" r="2.5"/></svg>
+        <svg viewBox="0 0 24 24"><ellipse cx="12" cy="16" rx="5" ry="4"/><circle cx="7" cy="10" r="2.5"/><circle cx="12" cy="8" r="2.5"/><circle cx="17" cy="10" r="2.5"/></svg>
+        <svg viewBox="0 0 24 24"><ellipse cx="12" cy="16" rx="5" ry="4"/><circle cx="7" cy="10" r="2.5"/><circle cx="12" cy="8" r="2.5"/><circle cx="17" cy="10" r="2.5"/></svg>
+      </div>
+    </div>
+
+    <!-- ── Mascotas ───────────────────────────────────── -->
+    <section class="block block--pets" id="mascotas">
+      <div class="block__deco block__deco--paws" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><ellipse cx="12" cy="16" rx="5" ry="4"/><circle cx="7" cy="10" r="2.5"/><circle cx="12" cy="8" r="2.5"/><circle cx="17" cy="10" r="2.5"/><circle cx="19" cy="14" r="2"/></svg>
+        <svg viewBox="0 0 24 24"><ellipse cx="12" cy="16" rx="5" ry="4"/><circle cx="7" cy="10" r="2.5"/><circle cx="12" cy="8" r="2.5"/><circle cx="17" cy="10" r="2.5"/></svg>
+      </div>
+
+      <div class="block__inner">
+        <header class="block__header block__header--center reveal">
+          <span class="block__icon block__icon--cat" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor"><ellipse cx="12" cy="16" rx="5" ry="4"/><circle cx="7" cy="10" r="2.5"/><circle cx="12" cy="8" r="2.5"/><circle cx="17" cy="10" r="2.5"/></svg>
+          </span>
+          <h2 class="block__title">Los que te esperan<br /><em>en casa</em></h2>
+        </header>
+
+        <p class="pets__intro reveal">
+          No solo nosotros te queremos, tienes a toda una manada.
+        </p>
+
+        <div class="pets-grid reveal" id="petsGrid">
+          <figure class="pet-card pet-card--cat">
+            <div class="pet-card__frame">
+              <img
+                src="images/gato.jpg"
+                alt="Kepler, el gato de Sam"
+                onerror="this.closest('.pet-card').classList.add('pet-card--empty')"
+              />
+              <div class="pet-card__ph">🐱</div>
+            </div>
+            <figcaption>
+              <span class="pet-card__name">Pankeis</span>
+            </figcaption>
+          </figure>
+
+          <figure class="pet-card pet-card--dog">
+            <div class="pet-card__frame">
+              <img
+                src="images/perro-1.jpeg"
+                alt="Primer perro de Sam"
+                onerror="this.closest('.pet-card').classList.add('pet-card--empty')"
+              />
+              <div class="pet-card__ph">🐕</div>
+            </div>
+            <figcaption>
+              <span class="pet-card__name">Keepler</span>
+            </figcaption>
+          </figure>
+
+          <figure class="pet-card pet-card--dog">
+            <div class="pet-card__frame">
+              <img
+                src="images/perro-2.jpeg"
+                alt="Segundo perro de Sam"
+                onerror="this.closest('.pet-card').classList.add('pet-card--empty')"
+              />
+              <div class="pet-card__ph">🐕</div>
+            </div>
+            <figcaption>
+              <span class="pet-card__type"></span>
+              <span class="pet-card__name">Newtoncito</span>
+            </figcaption>
+          </figure>
+
+          <figure class="pet-card pet-card--dog">
+            <div class="pet-card__frame">
+              <img
+                src="images/perro-3.jpeg"
+                alt="Tercer perro de Sam"
+                onerror="this.closest('.pet-card').classList.add('pet-card--empty')"
+              />
+              <div class="pet-card__ph">🐕</div>
+            </div>
+            <figcaption>
+              <span class="pet-card__type"></span>
+              <span class="pet-card__name">Maax</span>
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="prose reveal">
+          <p>
+            <!-- Edita -->
+            Después de un día entero cuidando a otros, llegas a un hogar
+            lleno de vida: ronroneos, colas que no paran y cuatro pares de ojos
+            que solo quieren que estés ahí.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Familia ────────────────────────────────────── -->
+    <section class="block block--family" id="familia">
+      <div class="block__inner">
+        <header class="block__header block__header--center reveal">
+          <h2 class="block__title">Nosotros<br /><em>tres</em></h2>
+        </header>
+
+        <div class="family-list">
+          <figure class="family-photo reveal">
+            <div class="family-photo__frame">
+              <img
+                src="images/sam.jpg"
+                alt="Sam"
+                onerror="this.closest('.family-photo').classList.add('family-photo--empty')"
+              />
+              <div class="family-photo__ph">
+                <span>Tu foto aquí</span>
+                <small>images/sam.jpg</small>
+              </div>
+            </div>
+            <figcaption class="family-photo__label">Sam</figcaption>
+          </figure>
+
+          <figure class="family-photo reveal">
+            <div class="family-photo__frame">
+              <img
+                src="images/Sam-2.JPG"
+                alt="Sam con su hermano"
+                onerror="this.closest('.family-photo').classList.add('family-photo--empty')"
+              />
+              <div class="family-photo__ph">
+                <span>Tu foto aquí</span>
+                <small>images/sam-hermano.jpg</small>
+              </div>
+            </div>
+            <figcaption class="family-photo__label">Yo mero</figcaption>
+          </figure>
+
+          <figure class="family-photo reveal">
+            <div class="family-photo__frame">
+              <img
+                src="images/sam-familia.jpg"
+                alt="Sam con su hermano y su mamá"
+                onerror="this.closest('.family-photo').classList.add('family-photo--empty')"
+              />
+              <div class="family-photo__ph">
+                <span>Tu foto aquí</span>
+                <small>images/sam-familia.jpg</small>
+              </div>
+            </div>
+            <figcaption class="family-photo__label">Mamá</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Cierre ─────────────────────────────────────── -->
+    <section class="block block--finale" id="mensaje">
+      <div class="finale reveal finale--interactive">
+        <div class="finale__med-corner" aria-hidden="true">
+          <svg viewBox="0 0 40 40"><path d="M20 4v32M4 20h32" stroke="currentColor" stroke-width="1.5"/></svg>
+        </div>
+        <div class="finale__cat-corner" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor"><ellipse cx="12" cy="16" rx="5" ry="4"/><circle cx="7" cy="10" r="2.5"/><circle cx="12" cy="8" r="2.5"/><circle cx="17" cy="10" r="2.5"/></svg>
+        </div>
+
+        <div class="finale__date">
+          <span class="finale__day">27</span>
+          <span class="finale__month">Junio · 2002</span>
+        </div>
+
+        <p class="finale__msg">
+          <!-- Edita -->
+          Feliz cumpleaños, Sam. Veinticuatro años de ser tú —
+          y yo sigo aprendiendo de mi hermana cada día.
+          Que este año te traiga salud, calma, buenos pacientes
+          y muchas tardes con tu gato y tus perros.
+        </p>
+
+        <p class="finale__sign">
+          Con todo mi cariño,<br />
+          <em>tu hermano</em>
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="foot">
+    <span>🩺</span>
+    <span>Sam</span>
+    <span>🐾</span>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
