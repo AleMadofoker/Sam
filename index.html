@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#eef5f3" />
   <meta name="description" content="Para Sam — 27 de junio" />
+  <meta property="og:title" content="¡Feliz cumpleaños, Sam!" />
+  <meta property="og:description" content="Algo especial de tu hermano — abre el enlace" />
+  <meta property="og:image" content="https://alemadofoker.github.io/Sam/images/gato.jpg" />
+  <meta property="og:type" content="website" />
   <title>Feliz Pumpe wey</title>
   <link rel="icon" href="images/gato.jpg" type="image/jpeg" />
   <link rel="apple-touch-icon" href="images/gato.jpg" />
@@ -13,9 +17,30 @@
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;1,8..60,400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
-<body class="welcome-open">
+<body class="site-locked">
+  <div class="lock-screen" id="lockScreen">
+    <div class="lock-screen__bg" aria-hidden="true"></div>
+    <div class="lock-screen__card">
+      <div class="lock-screen__avatar">
+        <img src="images/gato.jpg" alt="" width="88" height="88" />
+      </div>
+      <p class="lock-screen__date">27 de junio</p>
+      <h2 class="lock-screen__title">Todavía no es tu día…</h2>
+      <p class="lock-screen__sub">Vuelve cuando sea tu cumple</p>
+      <p class="lock-screen__label" id="lockLabel">Faltan</p>
+      <div class="lock-screen__timer">
+        <div class="lock-screen__unit"><span id="lockDays">0</span><small>días</small></div>
+        <div class="lock-screen__unit"><span id="lockHours">0</span><small>hrs</small></div>
+        <div class="lock-screen__unit"><span id="lockMins">0</span><small>min</small></div>
+        <div class="lock-screen__unit"><span id="lockSecs">0</span><small>seg</small></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="site-content" id="siteContent" hidden>
   <div class="scroll-progress" aria-hidden="true"><div class="scroll-progress__bar"></div></div>
   <canvas class="med-particles" id="medParticles" aria-hidden="true"></canvas>
+  <canvas class="confetti-canvas" id="confettiCanvas" aria-hidden="true"></canvas>
 
   <audio id="bgMusic" loop preload="auto">
     <source src="audio/song.mp3" type="audio/mpeg" />
@@ -28,10 +53,10 @@
         <img src="images/gato.jpg" alt="" width="80" height="80" />
       </div>
       <p class="welcome__date">27 de junio</p>
-      <h2 class="welcome__title">Feliz cumpleaños,<br /><em>Perrotaaa !</em></h2>
+      <h2 class="welcome__title">Feliz cumpleaños<br /><em>Perrotaaa </em></h2>
       <p class="welcome__sub">De parte de tu hermano favorito :)</p>
       <button class="welcome__btn" id="welcomeBtn" type="button">
-        <span>Haz click aquí</span>
+        <span>Click aquí</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
       </button>
     </div>
@@ -71,6 +96,7 @@
         Mi hermana. Doctora.<br />
         Y dueña del pinche pankeis :)
       </p>
+
       <div class="hero__chips">
       </div>
     </div>
@@ -101,10 +127,17 @@
     <section class="block block--med" id="doctora">
       <div class="med-monitor" aria-hidden="true">
         <div class="med-monitor__screen">
-          <svg class="med-monitor__ecg" viewBox="0 0 200 40" preserveAspectRatio="none">
-            <path d="M0,20 L30,20 L38,20 L42,6 L46,34 L50,20 L80,20 L88,20 L92,12 L96,28 L100,20 L200,20"/>
-          </svg>
-          <span class="med-monitor__label">♥ bpm</span>
+          <div class="med-monitor__ecg-wrap">
+            <svg class="med-monitor__ecg" viewBox="0 0 200 40" preserveAspectRatio="none">
+              <path d="M0,20 L30,20 L38,20 L42,6 L46,34 L50,20 L80,20 L88,20 L92,12 L96,28 L100,20 L200,20"/>
+            </svg>
+          </div>
+          <div class="med-monitor__stats">
+            <svg class="med-monitor__heart" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 21s-6-4.35-6-10a6 6 0 0 1 12 0c0 5.65-6 10-6 10z"/>
+            </svg>
+            <span class="med-monitor__bpm"><span class="med-monitor__value">72</span> BPM</span>
+          </div>
         </div>
       </div>
 
@@ -263,6 +296,28 @@
             que solo quieren que estés ahí.
           </p>
         </div>
+
+        <section class="cat-gallery reveal" id="galeria-gato" aria-label="Galería de Pankeis">
+          <h3 class="cat-gallery__title">Álbum de <em>Pankeis</em></h3>
+          <p class="cat-gallery__sub">El verdadero protagonista</p>
+          <div class="cat-gallery__track">
+            <figure class="cat-gallery__item"><img src="images/gato.jpg" alt="Pankeis" loading="lazy" /></figure>
+            <figure class="cat-gallery__item"><img src="images/gatos/gato-02.jpg" alt="Pankeis" loading="lazy" /></figure>
+            <figure class="cat-gallery__item"><img src="images/gatos/gato-03.jpg" alt="Pankeis" loading="lazy" /></figure>
+            <figure class="cat-gallery__item"><img src="images/gatos/gato-04.jpg" alt="Pankeis" loading="lazy" /></figure>
+            <figure class="cat-gallery__item"><img src="images/gatos/gato-05.jpg" alt="Pankeis" loading="lazy" /></figure>
+            <figure class="cat-gallery__item"><img src="images/gatos/gato-06.jpg" alt="Pankeis" loading="lazy" /></figure>
+            <figure class="cat-gallery__item"><img src="images/gatos/gato-07.jpg" alt="Pankeis" loading="lazy" /></figure>
+            <figure class="cat-gallery__item"><img src="images/gatos/gato-08.jpg" alt="Pankeis" loading="lazy" /></figure>
+            <figure class="cat-gallery__item"><img src="images/gatos/gato-09.jpg" alt="Pankeis" loading="lazy" /></figure>
+            <figure class="cat-gallery__item"><img src="images/gatos/gato-10.jpg" alt="Pankeis" loading="lazy" /></figure>
+            <figure class="cat-gallery__item"><img src="images/gatos/gato-11.jpg" alt="Pankeis" loading="lazy" /></figure>
+            <figure class="cat-gallery__item"><img src="images/gatos/gato-12.jpg" alt="Pankeis" loading="lazy" /></figure>
+            <figure class="cat-gallery__item"><img src="images/gatos/gato-13.jpg" alt="Pankeis" loading="lazy" /></figure>
+            <figure class="cat-gallery__item"><img src="images/gatos/gato-14.jpg" alt="Pankeis" loading="lazy" /></figure>
+            <figure class="cat-gallery__item"><img src="images/gatos/gato-15.jpg" alt="Pankeis" loading="lazy" /></figure>
+          </div>
+        </section>
       </div>
     </section>
 
@@ -359,6 +414,7 @@
     <span>Sam</span>
     <span>🐾</span>
   </footer>
+  </div>
 
   <script src="js/main.js"></script>
 </body>

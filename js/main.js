@@ -3,6 +3,128 @@
 
   const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  // ── Confetti ───────────────────────────────────────────
+  function fireConfetti() {
+    if (prefersReduced) return;
+
+    const canvas = document.getElementById("confettiCanvas");
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+    const colors = ["#7eb5aa", "#3d6b7a", "#e8c47a", "#d4a574", "#e8a0a8", "#f5efe6"];
+    let pieces = [];
+    let frame = 0;
+    const maxFrames = 180;
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    resize();
+
+    for (let i = 0; i < 80; i++) {
+      pieces.push({
+        x: canvas.width * 0.5 + (Math.random() - 0.5) * canvas.width * 0.5,
+        y: canvas.height * 0.35 + (Math.random() - 0.5) * 80,
+        w: Math.random() * 8 + 4,
+        h: Math.random() * 6 + 3,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        vx: (Math.random() - 0.5) * 6,
+        vy: Math.random() * -8 - 4,
+        rot: Math.random() * 360,
+        vr: (Math.random() - 0.5) * 8,
+        gravity: 0.18,
+      });
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      pieces.forEach((p) => {
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate((p.rot * Math.PI) / 180);
+        ctx.fillStyle = p.color;
+        ctx.globalAlpha = Math.max(0, 1 - frame / maxFrames);
+        ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+        ctx.restore();
+
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += p.gravity;
+        p.rot += p.vr;
+        p.vx *= 0.99;
+      });
+
+      frame++;
+      if (frame < maxFrames) {
+        requestAnimationFrame(draw);
+      } else {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+    }
+
+    draw();
+    window.addEventListener("resize", resize, { once: true });
+  }
+
+  function canAccessSite() {
+    const now = new Date();
+    return !(now.getMonth() < 5 || (now.getMonth() === 5 && now.getDate() < 27));
+  }
+
+  function getUnlockDate() {
+    const now = new Date();
+    return new Date(now.getFullYear(), 5, 27, 0, 0, 0, 0);
+  }
+
+  function pad(n) {
+    return String(n).padStart(2, "0");
+  }
+
+  const lockScreen = document.getElementById("lockScreen");
+  const siteContent = document.getElementById("siteContent");
+
+  function updateLockCountdown() {
+    const target = getUnlockDate();
+    const diff = target - new Date();
+
+    if (diff <= 0) {
+      location.reload();
+      return;
+    }
+
+    const days = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff / 3600000) % 24);
+    const mins = Math.floor((diff / 60000) % 60);
+    const secs = Math.floor((diff / 1000) % 60);
+
+    const lockDays = document.getElementById("lockDays");
+    const lockHours = document.getElementById("lockHours");
+    const lockMins = document.getElementById("lockMins");
+    const lockSecs = document.getElementById("lockSecs");
+    const lockLabel = document.getElementById("lockLabel");
+
+    if (lockDays) lockDays.textContent = String(days);
+    if (lockHours) lockHours.textContent = pad(hours);
+    if (lockMins) lockMins.textContent = pad(mins);
+    if (lockSecs) lockSecs.textContent = pad(secs);
+    if (lockLabel) {
+      lockLabel.textContent = days === 0 ? "¡Hoy casi es tu día!" : "Faltan";
+    }
+  }
+
+  if (!canAccessSite()) {
+    updateLockCountdown();
+    setInterval(updateLockCountdown, 1000);
+    return;
+  }
+
+  if (lockScreen) lockScreen.hidden = true;
+  if (siteContent) siteContent.hidden = false;
+  document.body.classList.remove("site-locked");
+  document.body.classList.add("welcome-open");
+
   // ── Welcome + background music ─────────────────────────
   const bgMusic = document.getElementById("bgMusic");
   const audioToggle = document.getElementById("audioToggle");
@@ -33,6 +155,7 @@
       document.body.classList.remove("welcome-open");
 
       startMusic();
+      fireConfetti();
 
       if (audioToggle) audioToggle.hidden = false;
 
@@ -59,7 +182,7 @@
 
   // ── Scroll reveal ──────────────────────────────────────
   const targets = document.querySelectorAll(
-    ".reveal, .pet-card, .family-photo"
+    ".reveal, .pet-card, .family-photo, .cat-gallery"
   );
 
   targets.forEach((el) => {
