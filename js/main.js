@@ -74,53 +74,51 @@
   const welcome = document.getElementById("welcome");
   const welcomeBtn = document.getElementById("welcomeBtn");
 
-  if (bgMusic) {
+  function updateToggle(playing) {
+    if (!audioToggle) return;
+    audioToggle.classList.toggle("is-playing", playing);
+    audioToggle.classList.toggle("is-muted", !playing);
+    audioToggle.setAttribute(
+      "aria-label",
+      playing ? "Pausar música" : "Reproducir música"
+    );
+  }
+
+  function startMusic() {
+    if (!bgMusic) return Promise.resolve();
     bgMusic.volume = 0.65;
+    return bgMusic.play().then(() => updateToggle(true)).catch(() => updateToggle(false));
+  }
 
-    function updateToggle(playing) {
-      if (!audioToggle) return;
-      audioToggle.classList.toggle("is-playing", playing);
-      audioToggle.classList.toggle("is-muted", !playing);
-      audioToggle.setAttribute(
-        "aria-label",
-        playing ? "Pausar música" : "Reproducir música"
-      );
-    }
+  function enterSite() {
+    if (!welcome || welcome.classList.contains("welcome--leaving")) return;
 
-    function startMusic() {
-      return bgMusic.play().then(() => updateToggle(true)).catch(() => updateToggle(false));
-    }
+    welcome.classList.add("welcome--leaving");
+    document.body.classList.remove("welcome-open");
 
-    function enterSite() {
-      if (!welcome || welcome.classList.contains("welcome--leaving")) return;
+    fireConfetti();
+    startMusic();
 
-      welcome.classList.add("welcome--leaving");
-      document.body.classList.remove("welcome-open");
+    if (audioToggle) audioToggle.hidden = false;
 
-      startMusic();
-      fireConfetti();
+    setTimeout(() => {
+      welcome.remove();
+    }, 550);
+  }
 
-      if (audioToggle) audioToggle.hidden = false;
+  if (welcomeBtn) {
+    welcomeBtn.addEventListener("click", enterSite);
+  }
 
-      setTimeout(() => {
-        welcome.remove();
-      }, 550);
-    }
-
-    if (welcomeBtn) {
-      welcomeBtn.addEventListener("click", enterSite);
-    }
-
-    if (audioToggle) {
-      audioToggle.addEventListener("click", () => {
-        if (bgMusic.paused) {
-          startMusic();
-        } else {
-          bgMusic.pause();
-          updateToggle(false);
-        }
-      });
-    }
+  if (bgMusic && audioToggle) {
+    audioToggle.addEventListener("click", () => {
+      if (bgMusic.paused) {
+        startMusic();
+      } else {
+        bgMusic.pause();
+        updateToggle(false);
+      }
+    });
   }
 
   // ── Scroll reveal ──────────────────────────────────────
